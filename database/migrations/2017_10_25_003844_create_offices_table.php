@@ -16,11 +16,15 @@ class CreateOfficesTable extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('business_id');
+            $table->integer('business_id')->unsigned();
             $table->string('phone');
             $table->decimal('latitude',10,8);
             $table->decimal('longitude',11,8);
+            $table->foreign('business_id')
+                    ->references('id')->on('businesses')
+                    ->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 

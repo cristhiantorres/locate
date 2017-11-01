@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Business;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BusinessController extends Controller
 {
@@ -24,7 +25,9 @@ class BusinessController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+
+        return view('business.new')->with(['user' => $user]); 
     }
 
     /**
@@ -35,7 +38,20 @@ class BusinessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $business = new Business;
+        $business->name = $request->name;
+        $business->email = $request->email;
+        $business->phone = $request->phone;
+        $business->address = $request->address;
+        $business->user_id = $request->user_id;
+
+        if ($business->save()) {
+            $message = 'Empresa creada';
+        }else{
+            $message = 'Opss.. Ocurrio algo malo';
+        }
+
+        return redirect()->back()->with('status', $message);
     }
 
     /**
@@ -57,7 +73,7 @@ class BusinessController extends Controller
      */
     public function edit(Business $business)
     {
-        //
+        return view('business.edit')->with('business', $business);
     }
 
     /**
@@ -69,7 +85,18 @@ class BusinessController extends Controller
      */
     public function update(Request $request, Business $business)
     {
-        //
+        $business->name     = $request->name;
+        $business->email    = $request->email;
+        $business->phone    = $request->phone;
+        $business->address  = $request->address;
+        
+        if ($business->update()) {
+            $message = 'Empresa actualizada';
+        } else {
+            $message = 'Opss.. Ocurrio algo malo';
+        }
+
+        return redirect()->back()->with('status', $message);
     }
 
     /**
@@ -80,6 +107,12 @@ class BusinessController extends Controller
      */
     public function destroy(Business $business)
     {
-        //
+        if ($business->delete()) {
+            $message = 'Empresa eliminada';
+        } else {
+            $message = 'Opss.. Ocurrio algo malo';
+        }
+
+        return redirect()->back()->with('status', $message);
     }
 }

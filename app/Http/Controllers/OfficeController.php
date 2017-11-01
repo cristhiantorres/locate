@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Office;
+use App\Business;
 use Illuminate\Http\Request;
 
 class OfficeController extends Controller
@@ -12,9 +13,11 @@ class OfficeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $business = Business::find($id);
+        $offices = $business->offices()->get();
+        return view('office.index',['offices' => $offices, 'business' => $business]);
     }
 
     /**
@@ -22,9 +25,10 @@ class OfficeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $business = Business::find($id);
+        return view('office.new')->with('business',$business);
     }
 
     /**
@@ -35,7 +39,22 @@ class OfficeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $office = new Office;
+        $office->name        = $request->input('name');
+        $office->business_id = $request->input('business_id');
+        $office->email       = $request->input('email');
+        $office->phone       = $request->input('phone');
+        $office->address     = $request->input('address');
+        $office->latitude    = $request->input('latitude');
+        $office->longitude   = $request->input('longitude');
+
+        if ($office->save()) {
+            $message = 'Oficina creada';
+        }else{
+            $message = 'Opss.. Ocurrio algo malo';
+        }
+
+        return redirect()->back()->with('status',$message);
     }
 
     /**

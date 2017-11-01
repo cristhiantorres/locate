@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Office;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,9 +13,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $office = Office::find($id);
+        $products = $office->products()->get();
+        return view('product.index',['office' => $office, 'products' => $products]);
     }
 
     /**
@@ -22,9 +25,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $office = Office::find($id);
+        return view('product.new',['office' => $office]);
     }
 
     /**
@@ -35,7 +39,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product;
+
+        $product->name        = $request->name;
+        $product->office_id   = $request->office_id;
+        $product->description = $request->description;
+        $product->price       = $request->price;
+
+        if ($product->save()) {
+            $message = 'Producto creado';
+        } else {
+            $message = 'Opss.. Ocurrio algo malo';
+        }
+
+        return redirect()->back()->with('status',$message);
     }
 
     /**

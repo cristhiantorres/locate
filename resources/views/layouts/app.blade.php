@@ -12,6 +12,7 @@
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <script src="//maps.google.com/maps/api/js?key=AIzaSyCD-rugQ05BEqG1ljxLH_RlNsarBdWekUM"></script>
 </head>
 <body>
   <div id="app" class="uk-offcanvas-content">
@@ -38,6 +39,7 @@
                 <a href="#">{{ Auth::user()->name }}<span uk-icon="icon: user"></span></a>
                 <div uk-dropdown="pos: bottom-right; mode: click; offset: -17;">
                   <ul class="uk-nav uk-navbar-dropdown-nav" role="menu">
+                    <li><a href="{{ route('home') }}">Dashboard</a></li>
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Salir</a>
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
@@ -57,38 +59,22 @@
       <div class="uk-offcanvas-bar">
         <button class="uk-offcanvas-close" type="button" uk-close></button>
         <ul class="uk-nav-default uk-nav-parent-icon" uk-nav>
-          <li class="uk-active"><a href="#">Active</a></li>
-          <li class="uk-parent">
-            <a href="#">Parent</a>
-            <ul class="uk-nav-sub">
-              <li><a href="#">Sub item</a></li>
-              <li>
-                <a href="#">Sub item</a>
-                <ul>
-                  <li><a href="#">Sub item</a></li>
-                  <li><a href="#">Sub item</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="uk-parent">
-            <a href="#">Parent</a>
-            <ul class="uk-nav-sub">
-              <li><a href="#">Sub item</a></li>
-              <li><a href="#">Sub item</a></li>
-            </ul>
-          </li>
+          <li class="uk-active"><a href="{{ route('home') }}">Dashboard</a></li>
         </ul>
       </div>
     </div>
     <div class="uk-sticky-placeholder" style="height: 80px;margin: 0px;"></div>
-    @yield('content')
+    <div class="uk-container">
+      <div class="uk-section-small">
+        @yield('content')
+      </div>
+    </div>
     @else
     @yield('content')
     @endauth
   </div>
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{ asset('js/sidebar.js') }}"></script>
+  @yield('javascript')
 </body>
 </html>

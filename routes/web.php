@@ -19,4 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+/*Businesses*/
 Route::resource('businesses','BusinessController');
+
+/*Offices*/
+Route::get('/offices/{id}/create', 'OfficeController@create')->name('office.new');
+Route::get('/offices/{id}/index', 'OfficeController@index')->name('office.index');
+Route::post('/offices', 'OfficeController@store')->name('office.create');
+
+/*Products*/
+Route::get('/products/{id}/index', 'ProductController@index')->name('products.index');
+Route::get('/products/{id}/create', 'ProductController@create')->name('products.new');
+Route::post('/products', 'ProductController@store')->name('products.create');

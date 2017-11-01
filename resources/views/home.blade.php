@@ -1,41 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="uk-container">
-    <div class="uk-section-small">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
+<h3>Mis empresas</h3>
+<div class="uk-margin">
+  <a href="{{ route('businesses.create') }}" class="uk-icon-button" uk-icon="icon: plus"></a>
+</div>
+@if (session('status'))
+<div class="uk-alert">
+  <a class="uk-alert-close" uk-close></a>
+  {{ session('status') }}
+</div>
+@endif
+<div class="uk-grid-medium uk-child-width-1-3@s" uk-grid>
+  @foreach ($businesses as $business)
+  <div>
+    <div class="uk-card uk-card-default uk-card-body">
+      <div class="uk-card-header">
+        <div class="uk-grid-small" uk-grid>
+          <div class="uk-width-expand">
+            <h3 class="uk-card-title uk-margin-remove-bottom">{{ $business->name }}</h3>
+            <p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00"><span uk-icon="icon: calendar"></span>{{ date_format($business->created_at,'d-m-Y') }}</time></p>
+          </div>
         </div>
-<!--         <div class="uk-offcanvas-content">
-
-    <button class="uk-button uk-button-default" type="button" uk-toggle="target: #offcanvas-overlay">Open</button>
-
-    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
-      <div class="uk-offcanvas-bar">
-
-        <button class="uk-offcanvas-close" type="button" uk-close></button>
-
-
-        <h3>Title</h3>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
+      </div>
+      <ul class="uk-card-body uk-list">
+        <li><span uk-icon="icon: location"></span> {{ $business->address }}</li>
+        <li><span uk-icon="icon: phone" ></span> {{ $business->phone }}</li>
+        <li><span uk-icon="icon: mail" ></span> {{ $business->email }}</li>
+      </ul>
+      <div class="uk-card-footer">
+        <a href="{{ route('office.index',['id' => $business->id]) }}" class="uk-button uk-button-text" title="Oficinas"><span uk-icon="icon: location"></span>{{ $business->offices()->count() }}</a>
+        <div style="float: right;">
+          <a href="{{ route('office.new', ['id' => $business->id ]) }}" title="Agregar officina" class="uk-icon-link uk-margin-small-right" uk-icon="icon: plus"></a>
+          {{-- <a href="{{ route('businesses.edit',['id' => $business->id]) }}" title="Editar" class="uk-icon-link uk-margin-small-right" uk-icon="icon: file-edit"></a> --}}
+          <a href="#modal-business-{{ $business->id }}" title="Editar" class="uk-icon-link uk-margin-small-right" uk-icon="icon: file-edit" uk-toggle></a>
+          <a onclick="event.preventDefault();document.getElementById('destroy-business-{{ $business->id }}').submit();" title="Eliminar" class="uk-icon-link" uk-icon="icon: trash"></a>
+          <form id="destroy-business-{{ $business->id }}" method="POST" action="{{ route('businesses.destroy', ['id' => $business->id ]) }}">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+          </form>
+        </div>
+      </div>
     </div>
-</div>
-
-    </div> -->
-</div>
+  </div>
+  @include('business.modal-edit')
+  @endforeach
 </div>
 @endsection

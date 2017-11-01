@@ -17,10 +17,13 @@ class CreateBusinessesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->string('phone');
             $table->string('address');
             $table->timestamps();
+            $table->foreign('user_id')
+                    ->references('id')->on('users')
+                    ->onDelete('cascade');
         });
     }
 
