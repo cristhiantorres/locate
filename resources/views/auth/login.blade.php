@@ -5,8 +5,8 @@
 <div class="uk-section-large">
   <div class="uk-container uk-container-large">
     <div uk-grid class="uk-child-width-1-1@s uk-child-width-2-3@l">
-      <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"> </div>
-      <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl">
+      <div class="uk-width-1-1@s uk-width-1-3@l uk-width-1-3@xl"> </div>
+      <div class="uk-width-1-1@s uk-width-1-3@l uk-width-1-3@xl">
         <div class="uk-card uk-card-default">
           <center>
             <h2>Iniciar Sesion</h2><br />
@@ -57,7 +57,7 @@
           </fieldset>
         </form></div>
       </div>
-      <div class="uk-width-1-1@s uk-width-1-5@l uk-width-1-3@xl"> </div>
+      <div class="uk-width-1-1@s uk-width-1-3@l uk-width-1-3@xl"> </div>
     </div>
   </div>
 </div>

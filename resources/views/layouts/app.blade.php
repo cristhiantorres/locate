@@ -12,7 +12,6 @@
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <script src="//maps.google.com/maps/api/js?key=AIzaSyCD-rugQ05BEqG1ljxLH_RlNsarBdWekUM"></script>
 </head>
 <body>
   <div id="app" class="uk-offcanvas-content">
@@ -65,6 +64,11 @@
     </div>
     <div class="uk-sticky-placeholder" style="height: 80px;margin: 0px;"></div>
     <div class="uk-container">
+      @if (session('status'))
+        <div class="alert alert-success">
+          {{ session('status') }}
+        </div>
+      @endif
       <div class="uk-section-small">
         @yield('content')
       </div>
@@ -76,5 +80,7 @@
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}"></script>
   @yield('javascript')
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD-rugQ05BEqG1ljxLH_RlNsarBdWekUM&libraries=places"></script>
 </body>
 </html>

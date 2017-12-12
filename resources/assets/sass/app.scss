@@ -11,14 +11,17 @@
 @import "~uikit/src/scss/mixins-theme.scss";
 @import "~uikit/src/scss/uikit-theme.scss";
 
-body {
-  background: #eee;
-}
 
 .uk-card-body {
   padding: 30px 30px !important;
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #eee;
+}
 .controls {
   margin-top: 10px;
   border: 1px solid transparent;
@@ -63,6 +66,7 @@ body {
 #target {
   width: 345px;
 }
+
 
 .uk-navbar-nav > li > a {
   text-transform: none !important;

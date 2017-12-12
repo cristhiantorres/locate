@@ -99,6 +99,12 @@ class OfficeController extends Controller
      */
     public function destroy(Office $office)
     {
-        //
+        if ($office->delete()) {
+            flash('Oficina eliminada correctamente','success');
+        }else{
+            flash('Opss.. Ocurrio algo malo','danger');
+        }
+
+        return back();
     }
 }

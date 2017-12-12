@@ -35,7 +35,7 @@
           <a href="{{ route('products.new', ['id' => $office->id ]) }}" title="Agregar Productos" class="uk-icon-link uk-margin-small-right" uk-icon="icon: plus"></a>
           <a href="#" title="Editar" class="uk-icon-link uk-margin-small-right" uk-icon="icon: file-edit"></a>
           <a onclick="event.preventDefault();document.getElementById('destroy-office-{{ $office->id }}').submit();" title="Eliminar" class="uk-icon-link" uk-icon="icon: trash"></a>
-          <form id="destroy-office-{{ $office->id }}" method="POST" action="{{ route('businesses.destroy', ['id' => $office->id ]) }}">
+          <form id="destroy-office-{{ $office->id }}" method="POST" action="{{ route('office.destroy', ['id' => $office->id ]) }}">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
           </form>
