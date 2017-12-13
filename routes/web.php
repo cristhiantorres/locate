@@ -33,4 +33,5 @@ Route::patch('/offices/{office}', 'OfficeController@update')->name('office.updat
 Route::get('/products/{id}/index', 'ProductController@index')->name('products.index');
 Route::get('/products/{id}/create', 'ProductController@create')->name('products.new');
 Route::post('/products', 'ProductController@store')->name('products.create');
-Route::delete('/products', 'ProductController@destroy')->name('products.destroy');
+Route::delete('/product/{product}', 'ProductController@destroy')->name('products.destroy');
+Route::patch('/product/{product}', 'ProductController@update')->name('products.update');

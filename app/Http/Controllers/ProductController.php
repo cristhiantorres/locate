@@ -15,9 +15,12 @@ class ProductController extends Controller
      */
     public function index($id)
     {
-        $office = Office::find($id);
-        $products = $office->products()->get();
-        return view('product.index',['office' => $office, 'products' => $products]);
+
+      $office = Office::find($id);
+
+      $products = $office->products()->get();
+
+      return view('product.index',['office' => $office, 'products' => $products]);
     }
 
     /**
@@ -27,8 +30,11 @@ class ProductController extends Controller
      */
     public function create($id)
     {
-        $office = Office::find($id);
-        return view('product.new',['office' => $office]);
+
+      $office = Office::find($id);
+
+      return view('product.new',['office' => $office]);
+
     }
 
     /**
@@ -39,42 +45,30 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product;
+      $product = new Product;
 
-        $product->name        = $request->name;
-        $product->office_id   = $request->office_id;
-        $product->description = $request->description;
-        $product->price       = $request->price;
 
-        if ($product->save()) {
-            $message = 'Producto creado';
-        } else {
-            $message = 'Opss.. Ocurrio algo malo';
-        }
+      $product->name        = $request->name;
 
-        return redirect()->back()->with('status',$message);
-    }
+      $product->office_id   = $request->office_id;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
+      $product->description = $request->description;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
+      $product->price       = $request->price;
+
+
+
+      if ($product->save()) {
+
+        $message = 'Producto creado';
+
+      } else {
+
+        $message = 'Opss.. Ocurrio algo malo';
+
+      }
+
+      return redirect()->back()->with('status',$message);
     }
 
     /**
@@ -86,7 +80,26 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+
+      $product->name        = $request->name;
+
+      $product->description = $request->description;
+
+      $product->price       = $request->price;
+
+
+
+      if ($product->update()) {
+
+        $message = 'Producto actualizado';
+
+      } else {
+
+        $message = 'Opss.. Ocurrio algo malo';
+
+      }
+
+      return back()->with('status',$message);
     }
 
     /**
@@ -97,6 +110,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+      if ($product->delete()) {
+
+        $message = 'Producto eliminado correctamente';
+
+      } else {
+
+        $message = 'Opss.. Ocurrio algo malo';
+
+      }
+
+      return back()->with('status',$message);
     }
-}
+  }
