@@ -76,9 +76,7 @@ module.exports = __webpack_require__(47);
 /***/ 47:
 /***/ (function(module, exports) {
 
-function formSubmit(id) {
-  $('form-update-' + id).submit();
-}
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/vagrant/code/locate/resources/assets/js/business.js'\n    at Error (native)");
 
 /***/ })
 

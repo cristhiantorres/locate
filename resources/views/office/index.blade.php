@@ -33,7 +33,8 @@
         <a href="{{ route('products.index',['id' => $office->id]) }}" class="uk-button uk-button-text" title="Productos"><span uk-icon="icon: cart"></span>{{ $office->products()->count() }}</a>
         <div style="float: right;">
           <a href="{{ route('products.new', ['id' => $office->id ]) }}" title="Agregar Productos" class="uk-icon-link uk-margin-small-right" uk-icon="icon: plus"></a>
-          <a href="#" title="Editar" class="uk-icon-link uk-margin-small-right" uk-icon="icon: file-edit"></a>
+          <a href="#modal-office-{{ $office->id }}" title="Editar" class="uk-icon-link uk-margin-small-right" uk-icon="icon: file-edit" uk-toggle></a>
+          
           <a onclick="event.preventDefault();document.getElementById('destroy-office-{{ $office->id }}').submit();" title="Eliminar" class="uk-icon-link" uk-icon="icon: trash"></a>
           <form id="destroy-office-{{ $office->id }}" method="POST" action="{{ route('office.destroy', ['id' => $office->id ]) }}">
             {{ csrf_field() }}
@@ -43,6 +44,8 @@
       </div>
     </div>
   </div>
+
+  @include('office.modal-edit')
   @endforeach
 </div>
 @endsection

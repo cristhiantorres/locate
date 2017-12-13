@@ -27,6 +27,7 @@ Route::get('/offices/{id}/create', 'OfficeController@create')->name('office.new'
 Route::get('/offices/{id}/index', 'OfficeController@index')->name('office.index');
 Route::post('/offices', 'OfficeController@store')->name('office.create');
 Route::delete('/offices/{office}', 'OfficeController@destroy')->name('office.destroy');
+Route::patch('/offices/{office}', 'OfficeController@update')->name('office.update');
 
 /*Products*/
 Route::get('/products/{id}/index', 'ProductController@index')->name('products.index');

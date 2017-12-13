@@ -28,11 +28,7 @@
     </div>
     <div class="uk-modal-footer uk-text-right">
       <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-      <button class="uk-button uk-button-primary" type="submit" onclick="formSubmit({{ $business->id }})">Actualizar</button>
+      <button form="form-update-{{ $business->id }}"  class="uk-button uk-button-primary" type="submit">Actualizar</button>
     </div>
   </div>
 </div>
-
-@section('javascript')
-<script src="{{ asset('js/business.js') }}"></script>
-@endsection

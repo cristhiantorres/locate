@@ -4,18 +4,6 @@
 
 <h2>Crear oficina - {{ $business->name }}</h2>
 
-@if (session('status'))
-
-<div class="uk-alert">
-
-  <a class="uk-alert-close" uk-close></a>
-
-  {{ session('status') }}
-
-</div>
-
-@endif
-
 <form method="POST" action="{{ route('office.create') }}" class="uk-grid-small" uk-grid>
 
   {{ csrf_field() }}

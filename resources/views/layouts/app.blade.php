@@ -64,12 +64,8 @@
     </div>
     <div class="uk-sticky-placeholder" style="height: 80px;margin: 0px;"></div>
     <div class="uk-container">
-      @if (session('status'))
-        <div class="alert alert-success">
-          {{ session('status') }}
-        </div>
-      @endif
       <div class="uk-section-small">
+        @include('flash')
         @yield('content')
       </div>
     </div>

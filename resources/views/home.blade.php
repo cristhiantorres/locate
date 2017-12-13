@@ -13,6 +13,7 @@
 @endif
 <div class="uk-grid-medium uk-child-width-1-3@s" uk-grid>
   @foreach ($businesses as $business)
+  @include('business.modal-edit')
   <div>
     <div class="uk-card uk-card-default uk-card-body">
       <div class="uk-card-header">
@@ -43,7 +44,6 @@
       </div>
     </div>
   </div>
-  @include('business.modal-edit')
   @endforeach
 </div>
 @endsection

@@ -60,16 +60,23 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 44);
+/******/ 	return __webpack_require__(__webpack_require__.s = 48);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 44:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
-(function webpackMissingModule() { throw new Error("Cannot find module \"/home/vagrant/Code/locate/resources/assets/js/script.js\""); }());
+module.exports = __webpack_require__(49);
 
+
+/***/ }),
+
+/***/ 49:
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/home/vagrant/code/locate/resources/assets/js/script.js'\n    at Error (native)");
 
 /***/ })
 

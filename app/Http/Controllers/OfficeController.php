@@ -15,9 +15,9 @@ class OfficeController extends Controller
      */
     public function index($id)
     {
-        $business = Business::find($id);
-        $offices = $business->offices()->get();
-        return view('office.index',['offices' => $offices, 'business' => $business]);
+      $business = Business::find($id);
+      $offices = $business->offices()->get();
+      return view('office.index',['offices' => $offices, 'business' => $business]);
     }
 
     /**
@@ -27,8 +27,8 @@ class OfficeController extends Controller
      */
     public function create($id)
     {
-        $business = Business::find($id);
-        return view('office.new')->with('business',$business);
+      $business = Business::find($id);
+      return view('office.new')->with('business',$business);
     }
 
     /**
@@ -39,22 +39,22 @@ class OfficeController extends Controller
      */
     public function store(Request $request)
     {
-        $office = new Office;
-        $office->name        = $request->input('name');
-        $office->business_id = $request->input('business_id');
-        $office->email       = $request->input('email');
-        $office->phone       = $request->input('phone');
-        $office->address     = $request->input('address');
-        $office->latitude    = $request->input('latitude');
-        $office->longitude   = $request->input('longitude');
+      $office = new Office;
+      $office->name        = $request->input('name');
+      $office->business_id = $request->input('business_id');
+      $office->email       = $request->input('email');
+      $office->phone       = $request->input('phone');
+      $office->address     = $request->input('address');
+      $office->latitude    = $request->input('latitude');
+      $office->longitude   = $request->input('longitude');
 
-        if ($office->save()) {
-            $message = 'Oficina creada';
-        }else{
-            $message = 'Opss.. Ocurrio algo malo';
-        }
+      if ($office->save()) {
+        $message = 'Oficina creada';
+      }else{
+        $message = 'Opss.. Ocurrio algo malo';
+      }
 
-        return redirect()->back()->with('status',$message);
+      return redirect()->back()->with('status',$message);
     }
 
     /**
@@ -88,7 +88,18 @@ class OfficeController extends Controller
      */
     public function update(Request $request, Office $office)
     {
-        //
+      $office->name        = $request->input('name');
+      $office->email       = $request->input('email');
+      $office->phone       = $request->input('phone');
+      $office->address     = $request->input('address');
+
+      if ($office->update()) {
+        $message = 'Oficina actualizada';
+      }else{
+        $message = 'Opss.. Ocurrio algo malo';
+      }
+
+      return redirect()->back()->with('status',$message);
     }
 
     /**
@@ -99,12 +110,12 @@ class OfficeController extends Controller
      */
     public function destroy(Office $office)
     {
-        if ($office->delete()) {
-            flash('Oficina eliminada correctamente','success');
-        }else{
-            flash('Opss.. Ocurrio algo malo','danger');
-        }
+      if ($office->delete()) {
+        flash('Oficina eliminada correctamente','success');
+      }else{
+        flash('Opss.. Ocurrio algo malo','danger');
+      }
 
-        return back();
+      return back();
     }
-}
+  }
